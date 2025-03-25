@@ -48,7 +48,6 @@ pip install -r requirements.txt
 ### Run each microservice in separate terminals
 
 ```Terminal
-// uvicorn business_logic_service.main:app --port 8002
 uvicorn business_logic_service.main:app --host 0.0.0.0 --port 8002
 uvicorn database_service.main:app --port 8001
 uvicorn client_service.main:app --port 8000
@@ -70,3 +69,14 @@ curl -X POST "http://localhost:8000/run?key=mydata" -H "Authorization: Bearer SE
 ```
 
 You should see ```{"original":"hello_world","processed":"HELLO_WORLD"}```
+
+---
+
+## Token-based authentication in Client Service
+
+```SECRET_TOKEN``` token is:
+- Hardcoded in client_service/main.py for simplicity.
+- Required in the Authorization header for any user request to the Client Service.
+
+Header```Authorization: Bearer SECRET_TOKEN```. If the token is missing or incorrect, the Client Service returns:
+```{"detail": "Invalid or missing token"}```

@@ -12,10 +12,9 @@ def health():
     return {"status": "ok"}
 
 @app.post("/process")
-def process(request: Request):
-    data = request.json()
+async def process(request: Request):
+    data = await request.json()
     input_data = data.get("data", "")
-    # Simulated long-running logic
-    time.sleep(2)
-    processed = input_data.upper()
-    return {"processed_data": processed}
+    result = input_data.upper()
+    return {"processed_data": result}
+
